@@ -8,7 +8,6 @@ function carregarTarefas() {
 
         const tarefas = JSON.parse(dados);
 
-        // Verifica se os dados salvos possuem o formato esperado.
         if (!Array.isArray(tarefas)) {
             return [];
         }
@@ -27,10 +26,9 @@ function carregarTarefas() {
     }
 }
 
-// Array principal de objetos.
+
 let tarefas = carregarTarefas();
 
-// Elementos do HTML.
 const taskForm = document.getElementById("taskForm");
 const disciplineInput = document.getElementById("discipline");
 const descriptionInput = document.getElementById("description");
@@ -38,12 +36,11 @@ const priorityInput = document.getElementById("priority");
 const taskList = document.getElementById("taskList");
 const taskFilter = document.getElementById("taskFilter");
 const emptyMessage = document.getElementById("emptyMessage");
-
 const totalTasks = document.getElementById("totalTasks");
 const completedTasks = document.getElementById("completedTasks");
 const pendingTasks = document.getElementById("pendingTasks");
 
-// Salva o array atualizado no localStorage.
+
 function salvarTarefas() {
     try {
         localStorage.setItem("taskflow-tarefas", JSON.stringify(tarefas));
@@ -53,7 +50,7 @@ function salvarTarefas() {
     }
 }
 
-// Cria um elemento HTML com texto seguro.
+
 function criarElemento(tag, classe, texto) {
     const elemento = document.createElement(tag);
 
@@ -68,7 +65,6 @@ function criarElemento(tag, classe, texto) {
     return elemento;
 }
 
-// Atualiza os indicadores do painel.
 function atualizarIndicadores() {
     const concluidas = tarefas.filter(
         (tarefa) => tarefa.concluida
@@ -79,7 +75,7 @@ function atualizarIndicadores() {
     pendingTasks.textContent = tarefas.length - concluidas;
 }
 
-// Monta o cartão de uma tarefa.
+
 function criarCartao(tarefa) {
     const cartao = criarElemento(
         "article",
@@ -94,7 +90,6 @@ function criarCartao(tarefa) {
         `Marcar ${tarefa.disciplina} como concluída`
     );
 
-    // Evento para concluir ou reabrir uma tarefa.
     checkbox.addEventListener("change", () => {
         alternarConclusao(tarefa.id);
     });
@@ -129,7 +124,7 @@ function criarCartao(tarefa) {
     const status = criarElemento(
         "span",
         "task-status",
-        tarefa.concluida ? "✓ Tarefa concluída" : "◷ Tarefa pendente"
+        tarefa.concluida ? " Tarefa concluída" : " Tarefa pendente"
     );
 
     linhaSuperior.append(disciplina, prioridade);
@@ -148,7 +143,7 @@ function criarCartao(tarefa) {
     );
     botaoExcluir.title = "Excluir tarefa";
 
-    // Evento para excluir uma tarefa.
+    
     botaoExcluir.addEventListener("click", () => {
         excluirTarefa(tarefa.id);
     });
@@ -158,13 +153,12 @@ function criarCartao(tarefa) {
     return cartao;
 }
 
-// Renderiza novamente a lista de tarefas.
 function renderizarTarefas() {
     taskList.replaceChildren();
 
     const filtro = taskFilter.value;
 
-    // Aplica o filtro selecionado.
+
     const tarefasFiltradas = tarefas.filter((tarefa) => {
         if (filtro === "pendentes") {
             return !tarefa.concluida;
@@ -177,12 +171,12 @@ function renderizarTarefas() {
         return true;
     });
 
-    // Percorre as tarefas e cria seus cartões.
+
     tarefasFiltradas.forEach((tarefa) => {
         taskList.appendChild(criarCartao(tarefa));
     });
 
-    // Exibe a mensagem quando não há resultados.
+   
     emptyMessage.hidden = tarefasFiltradas.length > 0;
 
     if (tarefas.length === 0) {
@@ -202,7 +196,7 @@ function renderizarTarefas() {
     atualizarIndicadores();
 }
 
-// Adiciona uma nova tarefa ao array.
+
 function adicionarTarefa(evento) {
     evento.preventDefault();
 
@@ -210,7 +204,6 @@ function adicionarTarefa(evento) {
     const descricao = descriptionInput.value.trim();
     const prioridade = priorityInput.value;
 
-    // Validação dos campos.
     if (!disciplina || !descricao) {
         alert("Preencha a disciplina e a descrição da tarefa.");
         return;
@@ -229,7 +222,7 @@ function adicionarTarefa(evento) {
 
     salvarTarefas();
 
-    // Volta ao filtro geral para exibir a nova tarefa.
+    
     taskFilter.value = "todas";
 
     renderizarTarefas();
@@ -238,7 +231,6 @@ function adicionarTarefa(evento) {
     disciplineInput.focus();
 }
 
-// Alterna o estado de conclusão.
 function alternarConclusao(id) {
     tarefas = tarefas.map((tarefa) => {
         if (tarefa.id === id) {
@@ -255,7 +247,7 @@ function alternarConclusao(id) {
     renderizarTarefas();
 }
 
-// Exclui uma tarefa pelo identificador.
+
 function excluirTarefa(id) {
     const confirmar = window.confirm(
         "Deseja realmente excluir esta tarefa?"
@@ -271,10 +263,8 @@ function excluirTarefa(id) {
     renderizarTarefas();
 }
 
-// Eventos do formulário e do filtro.
-taskForm.addEventListener("submit", adicionarTarefa);
 
+taskForm.addEventListener("submit", adicionarTarefa);
 taskFilter.addEventListener("change", renderizarTarefas);
 
-// Inicializa a interface com os dados salvos.
 renderizarTarefas();

@@ -5,39 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organizador de Estudos</title>
     <link rel="stylesheet" href="CSS/style.css">
+     <script src="JS/script.js" defer></script>
 </head>
 <body>
-      <header>
-        <div class="container">
-            <div class="logo">
-                <img src="IMG/logo.png">
-            </div>
-
-            <nav>
-                <div class="link">
-                    <a href="#">ínicio</a>
-                    <a href="http://127.0.0.1:5500/dicas.html">Dicas</a>
-                    <a href="http://127.0.0.1:5500/testes.html">Testes De Hábitos</a>
-
-                </div>
-            </nav>
-            <div class="botao">
-
-            </div>
-    </header>
-
-    <h1>Organização De Estudos</h1>
-    <p>ㅤ</p>
+     
      <main class="container">
         <section class="welcome">
-            <span class="eyebrow">SEU ESPAÇO DE ESTUDOS</span>
-            <h1>Minhas tarefas<span>.</span></h1>
-            <p>Organize suas atividades e acompanhe seu progresso.</p>
+            
+            <h1>Organizador De Estudos<span></span></h1>
         </section>
 
         <section class="stats" aria-label="Resumo das tarefas">
             <article class="stat-card">
-                <span class="stat-icon total-icon">▤</span>
+               
                 <div>
                     <p>Total de tarefas</p>
                     <strong id="totalTasks">0</strong>
@@ -45,7 +25,7 @@
             </article>
 
             <article class="stat-card">
-                <span class="stat-icon done-icon">✓</span>
+               
                 <div>
                     <p>Concluídas</p>
                     <strong id="completedTasks">0</strong>
@@ -53,7 +33,7 @@
             </article>
 
             <article class="stat-card">
-                <span class="stat-icon pending-icon">◷</span>
+             
                 <div>
                     <p>Pendentes</p>
                     <strong id="pendingTasks">0</strong>
@@ -67,7 +47,7 @@
                     <h2>Nova tarefa</h2>
                     <p>Preencha os campos para adicionar uma atividade.</p>
                 </div>
-                <span class="heading-symbol">＋</span>
+
             </div>
 
             <form id="taskForm">
@@ -129,18 +109,12 @@
 
             <div id="taskList" class="task-list" aria-live="polite"></div>
 
-            <p id="emptyMessage" class="empty-message">
-                <span class="empty-icon">✦</span>
-                <strong>Nenhuma tarefa por aqui</strong>
-                <span>Adicione sua primeira tarefa para começar!</span>
-            </p>
+           
         </section>
 
        
 
-       <footer class="footer">
-            <p> Feito por Raphael e Moroni.</p>
-        </footer>
+       
 
 </body>
 </html>
