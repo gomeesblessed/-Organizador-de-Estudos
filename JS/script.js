@@ -133,7 +133,7 @@ function criarCartao(tarefa) {
     const botaoExcluir = criarElemento(
         "button",
         "delete-button",
-        "×"
+        "Excluir"
     );
 
     botaoExcluir.type = "button";
